@@ -56,12 +56,12 @@ public class ProblemSet {
 		ArrayList<String> longestWords = new ArrayList<String>();
 		for (int i = 0; i < filteredArray.size(); i++){
 			//Replaces an array when theres a new longest
-			if (!frequencyRegects(filteredArray.get(i)) && (longestWords.size() == 0 || filteredArray.get(i).length() > longestWords.get(0).length())){
+			if (!ignoredWords(filteredArray.get(i)) && (longestWords.size() == 0 || filteredArray.get(i).length() > longestWords.get(0).length())){
 				longestWords.clear();
 				longestWords.add(filteredArray.get(i));
 			}
 			// Adds a word to an array if it's the same length as the longest
-			else if(!frequencyRegects(filteredArray.get(i)) && (longestWords.size() == 0 || filteredArray.get(i).length() == longestWords.get(0).length() && !longestWords.contains(filteredArray.get(i)))){
+			else if(!ignoredWords(filteredArray.get(i)) && (longestWords.size() == 0 || filteredArray.get(i).length() == longestWords.get(0).length() && !longestWords.contains(filteredArray.get(i)))){
 				longestWords.add(filteredArray.get(i));
 			}
 		}
@@ -73,12 +73,12 @@ public class ProblemSet {
 		for (int i = 0; i < filteredArray.size(); i++){
 			//Replaces an array when theres a new shortest
 
-			if (!frequencyRegects(filteredArray.get(i)) && (shortestWords.size() == 0 || filteredArray.get(i).length() < shortestWords.get(0).length())){
+			if (!ignoredWords(filteredArray.get(i)) && (shortestWords.size() == 0 || filteredArray.get(i).length() < shortestWords.get(0).length())){
 					shortestWords.clear();
 					shortestWords.add(filteredArray.get(i));
 				}
 			// Adds a word to an array if it's the same length as the shortest
-			else if(!frequencyRegects(filteredArray.get(i)) && (shortestWords.size() == 0 || filteredArray.get(i).length() == shortestWords.get(0).length() && !shortestWords.contains(filteredArray.get(i)))){
+			else if(!ignoredWords(filteredArray.get(i)) && (shortestWords.size() == 0 || filteredArray.get(i).length() == shortestWords.get(0).length() && !shortestWords.contains(filteredArray.get(i)))){
 					shortestWords.add(filteredArray.get(i));
 				}
 			}
@@ -91,7 +91,7 @@ public class ProblemSet {
 		ArrayList<String> validArray = new ArrayList<String>();
 		//Making a new arraylist without the "what" "and" "a" "an" "is"
 		for (int i = 0; i < filteredArray.size(); i++){
-			if (!frequencyRegects(filteredArray.get(i))){
+			if (!ignoredWords(filteredArray.get(i))){
 				validArray.add(filteredArray.get(i));
 			}
 		}
@@ -116,7 +116,7 @@ public class ProblemSet {
 		return wordAndFrequency;
 	}
 
-	public static boolean frequencyRegects(String arraySection){
+	public static boolean ignoredWords(String arraySection){
 		String[] regects = new String[]{"this", "and", "an", "a", "is"};
 		for (int i = 0; i < regects.length; i++){
 			if (arraySection.toLowerCase().equals(regects[i])){
@@ -152,11 +152,9 @@ public class ProblemSet {
 }
 
 	public static boolean letterInSentence(String sentence){
-		for (int i = 0; i < sentence.length() - 1; i++){
-			if ("[abcdefghijklmnopqrstuvwxyz1234567890]".contains(sentence.substring(i, i+1).toLowerCase())){
-				return true;
+		if (sentence.replaceAll("[a-z0-9]", "").length() == sentence.length()){
+				return false;
 			}
-	}
-	return false;
+	return true;
 }
 }
