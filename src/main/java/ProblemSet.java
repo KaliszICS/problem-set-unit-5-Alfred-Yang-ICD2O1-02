@@ -13,8 +13,9 @@ public class ProblemSet {
 		System.out.println("Welcome to the Text Analyzer.");
 		System.out.print("Please enter a sentence or paragraph: ");
 		String userInput;
-		int totalSpaces = 0, totalVowels = 0, numberOfSentences = 0;
+		int totalSpaces = 0, totalVowels = 0;
 		userInput = input.nextLine();
+		ArrayList<String> filteredArray = filteringArray(userInput);
 		
 		for (int i = 0; i < userInput.length(); i++){
 			if(userInput.charAt(i) == ' '){
@@ -22,22 +23,6 @@ public class ProblemSet {
 			}
 			if("aeiou".contains(userInput.substring(i, i+1))){
 				totalVowels++;
-			}
-		}
-		// Checking Number of Sentences
-		String[] sentenceCheck = userInput.split("[.!?]");
-		for (int i = 0; i < sentenceCheck.length; i++){
-			if (sentenceCheck[i].length() != 0 && letterInSentence(sentenceCheck[i])){
-				numberOfSentences++;
-			}
-		}
-		//filtering punctation and spaces
-		userInput = userInput.replaceAll("[,.!?]", " ");
-		String[] userArray = userInput.split(" ");
-		ArrayList<String> filteredArray = new ArrayList<String>();
-		for (int i = 0; i < userArray.length; i++){
-			if (!userArray[i].equals("")){
-				filteredArray.add(userArray[i]);
 			}
 		}
 		System.out.println("Total Characters: " + userInput.length());
@@ -48,7 +33,7 @@ public class ProblemSet {
 		System.out.println("Longest Word: " + longestWord(filteredArray).toString().replaceAll("[\\[\\]]", ""));
 		System.out.println("Shortest Word: " + shortestWord(filteredArray).toString().replaceAll("[\\[\\]]", ""));
 		System.out.println("Average Word Length: " + averageWordLength(filteredArray));
-		System.out.println("Number of Sentences: " + numberOfSentences);
+		System.out.println("Number of Sentences: " + numberOfSentences(userInput));
 		System.out.println("Unique Words: " + uniqueWords(filteredArray));
 	}
 //----------------------------------Fuctions Below---------------------------------------------------------------
@@ -157,4 +142,26 @@ public class ProblemSet {
 			}
 	return true;
 }
+	public static int numberOfSentences (String userInput){
+		int numberOfSentences = 0;
+		String[] sentenceCheck = userInput.split("[.!?]");
+		for (int i = 0; i < sentenceCheck.length; i++){
+			if (sentenceCheck[i].length() != 0 && letterInSentence(sentenceCheck[i])){
+				numberOfSentences++;
+			}
+		}
+		return numberOfSentences;
+	}
+
+	public static ArrayList<String> filteringArray(String userInput){
+		userInput = userInput.replaceAll("[,.!?]", " ");
+		String[] userArray = userInput.split(" ");
+		ArrayList<String> filteredArray = new ArrayList<String>();
+		for (int i = 0; i < userArray.length; i++){
+			if (!userArray[i].equals("")){
+				filteredArray.add(userArray[i]);
+			}
+		}
+		return filteredArray;
+	}
 }
