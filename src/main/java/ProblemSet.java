@@ -150,6 +150,7 @@ public class ProblemSet {
 	}
 	return uniqueWords;
 }
+
 	public static boolean letterInSentence(String sentence){
 		for (int i = 0; i < sentence.length() - 1; i++){
 			if ("[abcdefghijklmnopqrstuvwxyz]".contains(sentence.substring(i, i+1).toLowerCase())){
