@@ -1,0 +1,10 @@
+K(30%): 100
+I(30%): 93
+C(10%): 100
+A(30%): 93
+95.9%
+
+Missing an s on Total vowels output.
+Difficult casing words should be treated the same.
+You must remove ALL punctuation.  The instructions were just examples.
+Otherwise great work!
